@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "description": "Creation of console application",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node src index",
-    "dev": "nodemon src index"
+    "start": "node index",
+    "dev": "nodemon index"
   },
   "keywords": [
     "console",
@@ -17,7 +18,8 @@
   "author": "YagovkinDmytro",
   "license": "ISC",
   "dependencies": {
-    "commander": "^12.1.0"
+    "commander": "^12.1.0",
+    "detect-file-encoding-and-language": "^2.4.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.4"

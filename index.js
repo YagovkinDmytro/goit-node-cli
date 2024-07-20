@@ -1,4 +1,22 @@
-console.log("Welcome to Node.js");
+import {
+  listContacts,
+  getContactById,
+  removeContact,
+  addContact,
+} from "./contacts.js";
+
+const invokeAction = async ({ action }) => {
+  switch (action) {
+    case "list":
+      const contactList = await listContacts();
+      return console.log(contactList);
+
+    default:
+      console.warn("\x1B[31m Unknown action type!");
+  }
+};
+
+invokeAction({ action: "list" });
 
 // import { program } from "commander";
 // program
