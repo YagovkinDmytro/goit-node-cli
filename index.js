@@ -5,18 +5,23 @@ import {
   addContact,
 } from "./contacts.js";
 
-const invokeAction = async ({ action }) => {
+const invokeAction = async ({ action, id }) => {
   switch (action) {
     case "list":
       const contactList = await listContacts();
       return console.log(contactList);
-
+    case "get":
+      const contact = await getContactById(id);
+      return console.log(contact);
     default:
       console.warn("\x1B[31m Unknown action type!");
   }
 };
 
-invokeAction({ action: "list" });
+//invokeAction({ action: "list" });
+invokeAction({ action: "get", id: "rsKkOQUi80UsgVPCcLZZW" });
+
+/////////////////////////////////////////////////
 
 // import { program } from "commander";
 // program

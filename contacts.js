@@ -2,17 +2,26 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import DetectFileEncodingAndLanguage from "detect-file-encoding-and-language";
 
-const contactsPath = "./db/contacts.json";
+const contactsPath = path.resolve("db", "contacts.json");
 
 export async function listContacts() {
   // ...твій код. Повертає масив контактів.
-  const { encoding } = await DetectFileEncodingAndLanguage(contactsPath);
-  const contacts = await fs.readFile(contactsPath, encoding);
-  return JSON.parse(contacts);
+  try {
+    const { encoding } = await DetectFileEncodingAndLanguage(contactsPath);
+    const contactsData = await fs.readFile(contactsPath, encoding);
+    const contacts = JSON.parse(contactsData);
+    return contacts;
+  } catch (error) {
+    console.log("\x1B[31m Error parsing JSON:", error);
+    throw error;
+  }
 }
 
-export async function getContactById(contactId) {
+export async function getContactById(id) {
   // ...твій код. Повертає об'єкт контакту з таким id. Повертає null, якщо контакт з таким id не знайдений.
+  const contacts = await listContacts();
+  const result = contacts.find((item) => item.id === id);
+  return result;
 }
 
 export async function removeContact(contactId) {
