@@ -5,7 +5,7 @@ import {
   addContact,
 } from "./contacts.js";
 
-const invokeAction = async ({ action, id }) => {
+const invokeAction = async ({ action, id, ...data }) => {
   switch (action) {
     case "list":
       const contactList = await listContacts();
@@ -13,13 +13,24 @@ const invokeAction = async ({ action, id }) => {
     case "get":
       const contact = await getContactById(id);
       return console.log(contact);
+    case "add":
+      const newContact = await addContact(data);
+      return console.log(newContact);
+    case "reamove":
+      return;
     default:
       console.warn("\x1B[31m Unknown action type!");
   }
 };
 
 //invokeAction({ action: "list" });
-invokeAction({ action: "get", id: "rsKkOQUi80UsgVPCcLZZW" });
+// invokeAction({ action: "get", id: "rsKkOQUi80UsgVPCcLZZW" });
+// invokeAction({
+//   action: "add",
+//   name: "Alex",
+//   email: "alex@gmail.com",
+//   phone: "(992) 914-8892",
+// });
 
 /////////////////////////////////////////////////
 
